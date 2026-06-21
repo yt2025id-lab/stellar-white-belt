@@ -95,14 +95,16 @@ function App() {
   }, [pubKey, fetchBalance]);
 
   useEffect(() => {
-    isConnected().then(({ isConnected: connected }) => {
-      if (connected) {
-        getAddress().then(({ address }) => {
-          setPubKey(address);
-          fetchBalance(address);
-        });
-      }
-    });
+    isConnected()
+      .then(({ isConnected: connected }) => {
+        if (connected) {
+          getAddress().then(({ address }) => {
+            setPubKey(address);
+            fetchBalance(address);
+          });
+        }
+      })
+      .catch(() => {});
   }, [fetchBalance]);
 
   const sendXLM = async () => {
