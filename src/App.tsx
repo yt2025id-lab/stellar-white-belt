@@ -277,7 +277,19 @@ function App() {
 
       {!pubKey && (
         <div className="empty-state">
-          <div className="empty-icon">&#9744;</div>
+          <div className="sphere-loader">
+            {[...Array(8)].map((_, s) => (
+              <div key={s} className={`sphere sphere${s + 1}`} style={{ '--rot': s } as React.CSSProperties}>
+                {[...Array(12)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="item"
+                    style={{ '--rot-y': i } as React.CSSProperties}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
           <h2>Welcome to Stellar Pay</h2>
           <p>
             Connect your Freighter wallet to check your balance and send XLM on

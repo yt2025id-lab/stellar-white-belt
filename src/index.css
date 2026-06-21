@@ -394,6 +394,51 @@ body {
   margin-bottom: 8px;
 }
 
+.sphere-loader {
+  width: 160px;
+  height: 160px;
+  position: relative;
+  margin-bottom: 16px;
+  transform-style: preserve-3d;
+  perspective: 2000px;
+  animation: girar 8s linear infinite;
+}
+
+.sphere-loader .sphere {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-style: preserve-3d;
+  transform: rotate(calc(var(--rot) * 20deg));
+}
+
+.sphere-loader .item {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  transform: rotateY(calc(var(--rot-y) * 40deg));
+  border: 1px solid var(--border);
+}
+
+.sphere1 .item { background: rgba(244, 132, 26, 0.08); }
+.sphere2 .item { background: rgba(244, 132, 26, 0.12); }
+.sphere3 .item { background: rgba(244, 132, 26, 0.16); }
+.sphere4 .item { background: rgba(244, 132, 26, 0.20); }
+.sphere5 .item { background: rgba(224, 117, 16, 0.16); }
+.sphere6 .item { background: rgba(224, 117, 16, 0.12); }
+.sphere7 .item { background: rgba(74, 48, 32, 0.08); }
+.sphere8 .item { background: rgba(74, 48, 32, 0.12); }
+
+@keyframes girar {
+  0%   { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
 .empty-state h2 {
   font-size: 20px;
   font-weight: 600;
