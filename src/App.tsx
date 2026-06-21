@@ -178,12 +178,12 @@ function App() {
             <span className="badge badge-connected">Connected</span>
             <span className="address">{formatAddress(pubKey)}</span>
             <button className="btn btn-outline" onClick={disconnectWallet}>
-              Disconnect
+              <span className="btn-text">Disconnect</span>
             </button>
           </div>
         ) : (
           <button className="btn btn-primary" onClick={connectWallet}>
-            Connect Freighter Wallet
+            <span className="btn-text">Connect Freighter Wallet</span>
           </button>
         )}
       </header>
@@ -243,7 +243,7 @@ function App() {
               onClick={sendXLM}
               disabled={loading || !recipient || !amount}
             >
-              {loading ? "Sending..." : "Send Payment"}
+              {loading ? <span className="btn-text">Sending...</span> : <span className="btn-text">Send Payment</span>}
             </button>
           </section>
 
