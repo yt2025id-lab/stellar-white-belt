@@ -11,8 +11,6 @@ import {
   Operation,
   Asset,
   Networks,
-  xdr,
-  Transaction,
   Memo,
 } from "stellar-sdk";
 
@@ -107,38 +105,37 @@ function App() {
 
     try {
       const account = await server.loadAccount(pubKey);
-      const parsedAmount = amount;
 
       const tx = new TransactionBuilder(account, {
-        fee: "100",
+        fee: "100000",
         networkPassphrase: Networks.TESTNET,
       })
         .addOperation(
           Operation.payment({
             destination: recipient,
             asset: Asset.native(),
-            amount: parsedAmount,
+            amount,
           })
         )
-        .addMemo(Memo.text(memo || "Stellar Pay"))
-        .setTimeout(180)
+        .addMemo(Memo.text("Pay"))
+        .setTimeout(300)
         .build();
 
-      const { signedTxXdr } = await signTransaction(
-        tx.toEnvelope().toXDR("base64"),
-        {
-          networkPassphrase: Networks.TESTNET,
-        }
+      const txXdr = tx.toEnvelope().toXDR("base64");
+
+      const { signedTxXdr } = await signTransaction(txXdr, {
+        networkPassphrase: Networks.TESTNET,
+        address: pubKey,
+      });
+
+      const result = await server.submitTransaction(
+        TransactionBuilder.fromXDR(signedTxXdr, Networks.TESTNET)
       );
 
-      const txEnvelope = xdr.TransactionEnvelope.fromXDR(signedTxXdr, "base64");
-      const transaction = new Transaction(txEnvelope, Networks.TESTNET);
-
-      const result = await server.submitTransaction(transaction);
       setTxResult({
         type: "success",
         hash: result.hash,
-        message: `Successfully sent ${parsedAmount} XLM!`,
+        message: `Successfully sent ${amount} XLM!`,
       });
       setRecipient("");
       setAmount("");
