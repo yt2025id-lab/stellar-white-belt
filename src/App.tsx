@@ -188,7 +188,13 @@ function App() {
             <div className="balance-value">
               {balance !== null ? (
                 <>
-                  <span className="balance-amount">{balance}</span>
+                    <span className="balance-amount">
+                      {balance !== null
+                        ? parseFloat(balance).toLocaleString(undefined, {
+                            maximumFractionDigits: 2,
+                          })
+                        : "0"}
+                    </span>
                   <span className="balance-currency">XLM</span>
                 </>
               ) : (
