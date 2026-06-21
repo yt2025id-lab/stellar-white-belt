@@ -198,38 +198,49 @@ function App() {
           </section>
 
           <section className="card send-card">
-            <h2>Send XLM</h2>
-            <div className="form-group">
-              <label htmlFor="recipient">Recipient Address</label>
-              <input
-                id="recipient"
-                type="text"
-                placeholder="G..."
-                value={recipient}
-                onChange={(e) => setRecipient(e.target.value)}
-              />
+            <h2 className="send-title">Send XLM</h2>
+            <div className="form-group floating">
+              <label>
+                <input
+                  id="recipient"
+                  type="text"
+                  className="input"
+                  placeholder=" "
+                  required
+                  value={recipient}
+                  onChange={(e) => setRecipient(e.target.value)}
+                />
+                <span>Recipient Address</span>
+              </label>
             </div>
-            <div className="form-group">
-              <label htmlFor="amount">Amount (XLM)</label>
-              <input
-                id="amount"
-                type="number"
-                placeholder="0.0"
-                step="0.0000001"
-                min="0.0000001"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-              />
+            <div className="form-group floating">
+              <label>
+                <input
+                  id="amount"
+                  type="number"
+                  className="input"
+                  placeholder=" "
+                  step="0.0000001"
+                  min="0.0000001"
+                  required
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                />
+                <span>Amount (XLM)</span>
+              </label>
             </div>
-            <div className="form-group">
-              <label htmlFor="memo">Memo (optional)</label>
-              <input
-                id="memo"
-                type="text"
-                placeholder="e.g. payment for coffee"
-                value={memo}
-                onChange={(e) => setMemo(e.target.value)}
-              />
+            <div className="form-group floating">
+              <label>
+                <input
+                  id="memo"
+                  type="text"
+                  className="input"
+                  placeholder=" "
+                  value={memo}
+                  onChange={(e) => setMemo(e.target.value)}
+                />
+                <span>Memo (optional)</span>
+              </label>
             </div>
             <button
               className="btn btn-primary btn-full"

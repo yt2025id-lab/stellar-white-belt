@@ -237,7 +237,7 @@ body {
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 20px;
   padding: 24px;
 }
 
@@ -248,6 +248,39 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 16px;
+}
+
+.send-title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 28px;
+  color: var(--text-h);
+  text-transform: none;
+  margin-bottom: 20px;
+}
+
+.send-title::before,
+.send-title::after {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  left: 0;
+  background-color: var(--accent);
+}
+
+.send-title::after {
+  animation: pulse-dot 1.4s ease-out infinite;
+}
+
+@keyframes pulse-dot {
+  from { transform: scale(0.8); opacity: 1; }
+  to   { transform: scale(2.2); opacity: 0; }
 }
 
 .balance-card {
@@ -282,39 +315,54 @@ body {
 .send-card {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
-.form-group {
+.form-group.floating {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0;
 }
 
-.form-group label {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
+.form-group.floating label {
+  position: relative;
+  display: block;
 }
 
-.form-group input {
+.form-group.floating .input {
   background: var(--bg-input);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 12px 14px;
-  font-size: 14px;
-  font-family: var(--font);
   color: var(--text-h);
-  outline: none;
-  transition: border-color 0.15s ease;
+  width: 100%;
+  padding: 22px 12px 8px 14px;
+  outline: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: var(--font);
+  transition: border-color 0.3s ease;
 }
 
-.form-group input::placeholder {
-  color: #C4AD93;
-}
-
-.form-group input:focus {
+.form-group.floating .input:focus {
   border-color: var(--accent);
+}
+
+.form-group.floating .input + span {
+  color: var(--text);
+  position: absolute;
+  left: 15px;
+  top: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  pointer-events: none;
+  transition: 0.25s ease;
+}
+
+.form-group.floating .input:focus + span,
+.form-group.floating .input:not(:placeholder-shown) + span {
+  color: var(--accent);
+  top: 6px;
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .result-card {
