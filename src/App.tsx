@@ -169,7 +169,7 @@ function App() {
     <div className="container">
       <header className="header">
         <div className="logo">
-          <span className="logo-icon">&#9670;</span>
+          <img src="/logoStellar.png" alt="Stellar" className="logo-img" />
           <h1>Stellar Pay</h1>
         </div>
         <p className="subtitle">Simple Payment dApp on Stellar Testnet</p>

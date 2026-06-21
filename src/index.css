@@ -53,9 +53,10 @@ body {
   margin-bottom: 6px;
 }
 
-.logo-icon {
-  font-size: 28px;
-  color: var(--accent);
+.logo-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
 }
 
 .logo h1 {
