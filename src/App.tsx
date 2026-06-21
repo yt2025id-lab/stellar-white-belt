@@ -3,7 +3,7 @@ import {
   isConnected,
   getAddress,
   signTransaction,
-  setAllowed,
+  requestAccess,
 } from "@stellar/freighter-api";
 import {
   Horizon,
@@ -50,23 +50,14 @@ function App() {
 
   const connectWallet = async () => {
     try {
-      const { isAllowed } = await setAllowed();
-      if (!isAllowed) {
+      const { address, error } = await requestAccess();
+      if (error || !address) {
         setTxResult({
           type: "error",
-          message: "Please approve the connection in Freighter.",
+          message: error ?? "Please approve the connection in Freighter.",
         });
         return;
       }
-      const { isConnected: connected } = await isConnected();
-      if (!connected) {
-        setTxResult({
-          type: "error",
-          message: "Wallet connection failed. Is Freighter installed?",
-        });
-        return;
-      }
-      const { address } = await getAddress();
       setPubKey(address);
       setTxResult(null);
       await fetchBalance(address);
@@ -74,7 +65,9 @@ function App() {
       const err = e as { message?: string };
       setTxResult({
         type: "error",
-        message: err.message ?? "Wallet connection failed",
+        message:
+          err.message ??
+          "Freighter not detected. Please install Freighter extension.",
       });
     }
   };
